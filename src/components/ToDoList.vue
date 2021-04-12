@@ -6,7 +6,7 @@
       tr
         th Название
         th Количество
-        th Количество
+        th
     draggable(
       v-if="list.length"
       tag="tbody"
@@ -31,7 +31,7 @@
     v-container(
       v-else
     )
-      div Список пуст
+      .table-empty Список пуст
 </template>
 
 <script lang="ts">
@@ -49,6 +49,7 @@ export default class ToDoList extends Vue {
 <style lang="sass" scoped>
   table tr th
     width: 50%
+    min-width: 98px
   .handle
     cursor: pointer
   .grabbing

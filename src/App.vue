@@ -1,8 +1,14 @@
 <template lang="pug">
   v-app
-    v-main
+    v-main(
+      class="grey lighten-5"
+    )
       v-container
-        ToDo
+        v-col(
+          sm="4"
+          class="mx-auto"
+        )
+          ToDo
 </template>
 
 <script lang="ts">

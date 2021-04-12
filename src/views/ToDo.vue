@@ -6,14 +6,14 @@
       v-text-field(
         v-model="name"
         max-width="300"
-        placeholder="Type and press Enter"
+        placeholder="Введите имя и нажмите Enter"
         @keypress.enter="name ? addItem() : null"
       )
       v-text-field(
         v-model="count"
         max-width="300"
-        placeholder="Type count"
-        @keypress.enter="count ? addItem() : null"
+        placeholder="Введите количество"
+        @keypress.enter="count && name ? addItem() : null"
       )
       v-btn(
         :disabled="name === ''"
@@ -22,16 +22,16 @@
     ToDoList(
       :list="list"
       fixed-header
+      v-slot:remove="{ index }"
     )
-      template(v-slot:remove="{ index }")
-        v-btn(
-          class="mx-2"
-          dark
-          small
-          color="primary"
-          @click="removeItem(index)"
-        )
-          v-icon(dark) mdi-minus
+      v-btn(
+        class="mx-2"
+        dark
+        small
+        color="primary"
+        @click="removeItem(index)"
+      )
+        v-icon(dark) mdi-minus
 </template>
 
 <script lang="ts">
@@ -47,17 +47,17 @@ export default class ToDo extends Vue {
   count = ''
 
   list = [
-    { name: 'Молоко', count: '1' },
-    { name: 'Хлеб', count: '2' },
-    { name: 'Трюфель', count: '3' },
+    { name: 'Молоко', count: '3' },
+    { name: 'Хлеб', count: '6' },
+    { name: 'Трюфель', count: '5' },
   ]
 
-  removeItem(idx: number): void {
-    this.list.splice(idx, 1);
+  removeItem(index: number): void {
+    this.list.splice(index, 1);
   }
 
   addItem(): void {
-    this.list.push({ name: this.name ? this.name : '--', count: this.count ? this.count : '--' });
+    this.list.push({ name: this.name, count: this.count ? this.count : '--' });
     this.name = '';
     this.count = '';
   }
